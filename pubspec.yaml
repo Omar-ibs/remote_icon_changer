@@ -4,7 +4,7 @@ version: 0.1.0
 homepage: https://github.com/Omar-ibs/app_icon_switcher
 repository: https://github.com/Omar-ibs/app_icon_switcher
 issue_tracker: https://github.com/Omar-ibs/app_icon_switcher/issues
-publish_to: none
+# publish_to: none
 
 environment:
   sdk: ^3.12.2
