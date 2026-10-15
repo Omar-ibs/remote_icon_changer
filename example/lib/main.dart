@@ -1,4 +1,4 @@
-import 'package:app_icon_switcher/app_icon_switcher.dart';
+import 'package:remote_icon_changer/remote_icon_changer.dart';
 import 'package:flutter/material.dart';
 
 /// The icons this app bundles. To really switch icons, add the matching
@@ -13,41 +13,41 @@ const icons = [
 ];
 
 void main() {
-  final switcher = AppIconSwitcher(
+  final changer = AppIconChanger(
     icons: icons,
     defaultIconId: 'classic',
     // remoteUrl: Uri.parse('https://example.com/app-icon.json'),
   )..attachLifecycle();
-  switcher.init();
-  runApp(MyApp(switcher: switcher));
+  changer.init();
+  runApp(MyApp(changer: changer));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key, required this.switcher});
+  const MyApp({super.key, required this.changer});
 
-  final AppIconSwitcher switcher;
+  final AppIconChanger changer;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: const Text('App icon switcher')),
+        appBar: AppBar(title: const Text('App icon changer')),
         body: ListenableBuilder(
-          listenable: switcher,
+          listenable: changer,
           builder: (context, _) => RadioGroup<String>(
-            groupValue: switcher.userChoice ?? switcher.defaultIconId,
+            groupValue: changer.userChoice ?? changer.defaultIconId,
             onChanged: (id) => _choose(context, id!),
             child: ListView(
               children: [
                 ListTile(
                   title: const Text('Current icon'),
-                  subtitle: Text(switcher.effectiveIconId),
+                  subtitle: Text(changer.effectiveIconId),
                 ),
-                if (switcher.isAssignedRemotely)
+                if (changer.isAssignedRemotely)
                   const ListTile(title: Text('Assigned by the remote config')),
-                if (switcher.hasPendingChange)
+                if (changer.hasPendingChange)
                   const ListTile(title: Text('Changes when you leave the app')),
-                for (final icon in switcher.icons)
+                for (final icon in changer.icons)
                   RadioListTile<String>(title: Text(icon.id), value: icon.id),
               ],
             ),
@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
   Future<void> _choose(BuildContext context, String id) async {
     final messenger = ScaffoldMessenger.of(context);
     try {
-      await switcher.choose(id);
+      await changer.choose(id);
     } catch (e) {
       messenger.showSnackBar(SnackBar(content: Text('Could not switch: $e')));
     }

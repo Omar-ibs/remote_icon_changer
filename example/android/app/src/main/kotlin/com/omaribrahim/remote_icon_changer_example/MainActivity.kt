@@ -1,4 +1,4 @@
-package com.omaribrahim.app_icon_switcher_example
+package com.omaribrahim.remote_icon_changer_example
 
 import io.flutter.embedding.android.FlutterActivity
 

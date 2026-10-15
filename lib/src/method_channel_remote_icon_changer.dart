@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
-import 'app_icon_switcher_platform.dart';
+import 'remote_icon_changer_platform.dart';
 
-/// [AppIconSwitcherPlatform] over the `app_icon_switcher` method channel.
-class MethodChannelAppIconSwitcher extends AppIconSwitcherPlatform {
+/// [AppIconChangerPlatform] over the `remote_icon_changer` method channel.
+class MethodChannelAppIconChanger extends AppIconChangerPlatform {
   @visibleForTesting
-  final MethodChannel methodChannel = const MethodChannel('app_icon_switcher');
+  final MethodChannel methodChannel = const MethodChannel('remote_icon_changer');
 
   @override
   Future<bool> isSupported() async {

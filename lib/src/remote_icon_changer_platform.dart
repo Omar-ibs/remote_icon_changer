@@ -1,19 +1,19 @@
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-import 'method_channel_app_icon_switcher.dart';
+import 'method_channel_remote_icon_changer.dart';
 
-/// The native side of [AppIconSwitcher]. Replace [instance] (or pass a
-/// platform to the switcher) to fake it in tests.
-abstract class AppIconSwitcherPlatform extends PlatformInterface {
-  AppIconSwitcherPlatform() : super(token: _token);
+/// The native side of [AppIconChanger]. Replace [instance] (or pass a
+/// platform to the changer) to fake it in tests.
+abstract class AppIconChangerPlatform extends PlatformInterface {
+  AppIconChangerPlatform() : super(token: _token);
 
   static final Object _token = Object();
 
-  static AppIconSwitcherPlatform _instance = MethodChannelAppIconSwitcher();
+  static AppIconChangerPlatform _instance = MethodChannelAppIconChanger();
 
-  static AppIconSwitcherPlatform get instance => _instance;
+  static AppIconChangerPlatform get instance => _instance;
 
-  static set instance(AppIconSwitcherPlatform instance) {
+  static set instance(AppIconChangerPlatform instance) {
     PlatformInterface.verifyToken(instance, _token);
     _instance = instance;
   }

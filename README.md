@@ -1,4 +1,4 @@
-# app_icon_switcher
+# remote_icon_changer
 
 Switch your app's home-screen icon among icons **bundled in the app**, on iOS
 and Android. The icon can come from:
@@ -55,10 +55,10 @@ once the backend clears the assignment.
 ```dart
 import 'dart:async';
 
-import 'package:app_icon_switcher/app_icon_switcher.dart';
+import 'package:remote_icon_changer/remote_icon_changer.dart';
 import 'package:flutter/widgets.dart';
 
-final iconSwitcher = AppIconSwitcher(
+final iconChanger = AppIconChanger(
   icons: const [
     AppIcon(id: 'classic', androidAlias: 'IconClassic'), // iosName null = primary icon
     AppIcon(id: 'midnight', androidAlias: 'IconMidnight', iosName: 'AppIcon-Midnight'),
@@ -69,21 +69,21 @@ final iconSwitcher = AppIconSwitcher(
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  iconSwitcher.attachLifecycle(); // refresh on resume; Android applies on pause
-  unawaited(iconSwitcher.init()); // load saved state, apply, check the backend
+  iconChanger.attachLifecycle(); // refresh on resume; Android applies on pause
+  unawaited(iconChanger.init()); // load saved state, apply, check the backend
   runApp(const MyApp());
 }
 
 // In a picker:
-await iconSwitcher.choose('midnight'); // ArgumentError for an unknown id
-iconSwitcher.effectiveIconId;          // what the icon is (or is about to be)
-iconSwitcher.isAssignedRemotely;       // explain why the user's pick has no effect
-iconSwitcher.hasPendingChange;         // Android: "changes when you leave the app"
+await iconChanger.choose('midnight'); // ArgumentError for an unknown id
+iconChanger.effectiveIconId;          // what the icon is (or is about to be)
+iconChanger.isAssignedRemotely;       // explain why the user's pick has no effect
+iconChanger.hasPendingChange;         // Android: "changes when you leave the app"
 ```
 
-`AppIconSwitcher` is a `ChangeNotifier`, so a `ListenableBuilder` keeps a
+`AppIconChanger` is a `ChangeNotifier`, so a `ListenableBuilder` keeps a
 picker up to date. State lives in SharedPreferences (keys prefixed
-`app_icon_switcher.`). In tests pass `store: MemoryIconStore()`, a fake
+`remote_icon_changer.`). In tests pass `store: MemoryIconStore()`, a fake
 `platform`, an `httpClient` (`MockClient` from `package:http/testing.dart`) and
 a `clock`.
 
@@ -162,7 +162,7 @@ In `android/app/src/main/AndroidManifest.xml`:
 
 ## Method channel
 
-Channel `app_icon_switcher`:
+Channel `remote_icon_changer`:
 
 | Method | Arguments | Returns |
 |---|---|---|

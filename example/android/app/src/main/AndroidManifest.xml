@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="app_icon_switcher_example"
+        android:label="remote_icon_changer_example"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Where [AppIconSwitcher] keeps the user's choice and the last known remote
+/// Where [AppIconChanger] keeps the user's choice and the last known remote
 /// assignment.
 abstract interface class IconStore {
   Future<String?> read(String key);
@@ -9,12 +9,12 @@ abstract interface class IconStore {
   Future<void> write(String key, String? value);
 }
 
-/// Stores values in SharedPreferences, with keys prefixed `app_icon_switcher.`.
+/// Stores values in SharedPreferences, with keys prefixed `remote_icon_changer.`.
 class SharedPreferencesIconStore implements IconStore {
   SharedPreferencesIconStore({SharedPreferencesAsync? preferences})
     : _preferences = preferences ?? SharedPreferencesAsync();
 
-  static const String prefix = 'app_icon_switcher.';
+  static const String prefix = 'remote_icon_changer.';
 
   final SharedPreferencesAsync _preferences;
 
@@ -28,7 +28,7 @@ class SharedPreferencesIconStore implements IconStore {
 }
 
 /// Keeps values in memory. Handy for tests; share one instance between two
-/// switchers to simulate an app restart.
+/// changers to simulate an app restart.
 class MemoryIconStore implements IconStore {
   MemoryIconStore([Map<String, String>? initial]) : values = {...?initial};
 

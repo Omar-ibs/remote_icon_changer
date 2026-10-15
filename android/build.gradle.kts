@@ -1,4 +1,4 @@
-group = "com.omaribrahim.app_icon_switcher"
+group = "com.omaribrahim.remote_icon_changer"
 version = "1.0-SNAPSHOT"
 
 buildscript {
@@ -26,7 +26,7 @@ plugins {
 }
 
 android {
-    namespace = "com.omaribrahim.app_icon_switcher"
+    namespace = "com.omaribrahim.remote_icon_changer"
 
     compileSdk = 36
 

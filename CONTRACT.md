@@ -1,4 +1,4 @@
-# app_icon_switcher — contract
+# remote_icon_changer — contract
 
 Shared spec for everyone working on this package and on its first user (the
 CubeMate app in `~/personal/rubic_cube`). Change it only by agreement.
@@ -31,7 +31,7 @@ Precedence (the admin wins):
   `checkEvery` (default 6 hours) unless `refresh(force: true)`.
 - Any HTTP status other than 200 counts as a failure.
 
-## Dart API (`package:app_icon_switcher/app_icon_switcher.dart`)
+## Dart API (`package:remote_icon_changer/remote_icon_changer.dart`)
 
 ```dart
 class AppIcon {
@@ -41,15 +41,15 @@ class AppIcon {
   final String? iosName;      // alternate icon name on iOS; null = the primary icon
 }
 
-class AppIconSwitcher extends ChangeNotifier {
-  AppIconSwitcher({
+class AppIconChanger extends ChangeNotifier {
+  AppIconChanger({
     required List<AppIcon> icons,
     required String defaultIconId,
     Uri? remoteUrl,                       // null = no remote checks
     Duration checkEvery = const Duration(hours: 6),
     http.Client? httpClient,
     IconStore? store,                     // default: SharedPreferencesIconStore
-    AppIconSwitcherPlatform? platform,    // default: method channel
+    AppIconChangerPlatform? platform,    // default: method channel
     DateTime Function()? clock,
   });
 
@@ -78,7 +78,7 @@ abstract interface class IconStore {
   Future<String?> read(String key);
   Future<void> write(String key, String? value); // null deletes
 }
-class SharedPreferencesIconStore implements IconStore { ... }   // keys prefixed "app_icon_switcher."
+class SharedPreferencesIconStore implements IconStore { ... }   // keys prefixed "remote_icon_changer."
 class MemoryIconStore implements IconStore { ... }              // for tests
 ```
 
@@ -88,7 +88,7 @@ the change is applied right away (it must happen in the foreground); on
 Android it is queued and applied when the app is paused, or right away when
 `apply()` is called while already in the background.
 
-## Method channel `app_icon_switcher`
+## Method channel `remote_icon_changer`
 
 | Method | Arguments | Returns |
 |---|---|---|

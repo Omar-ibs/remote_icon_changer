@@ -1,6 +1,6 @@
-# app_icon_switcher_example
+# remote_icon_changer_example
 
-Demonstrates how to use the app_icon_switcher plugin.
+Demonstrates how to use the remote_icon_changer plugin.
 
 ## Getting Started
 

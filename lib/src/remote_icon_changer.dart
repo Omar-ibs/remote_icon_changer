@@ -7,7 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
 import 'app_icon.dart';
-import 'app_icon_switcher_platform.dart';
+import 'remote_icon_changer_platform.dart';
 import 'icon_store.dart';
 
 /// Keeps the app's home-screen icon in line with, in order of precedence:
@@ -17,22 +17,22 @@ import 'icon_store.dart';
 /// 3. otherwise the default icon.
 ///
 /// Only icons bundled in the app can be used; the backend names one of them.
-class AppIconSwitcher extends ChangeNotifier {
-  AppIconSwitcher({
+class AppIconChanger extends ChangeNotifier {
+  AppIconChanger({
     required List<AppIcon> icons,
     required String defaultIconId,
     this._remoteUrl,
     this._checkEvery = const Duration(hours: 6),
     http.Client? httpClient,
     IconStore? store,
-    AppIconSwitcherPlatform? platform,
+    AppIconChangerPlatform? platform,
     DateTime Function()? clock,
   }) : _icons = List.unmodifiable(icons),
        _defaultIconId = defaultIconId,
        _httpClient = httpClient,
        _ownsHttpClient = httpClient == null,
        _store = store ?? SharedPreferencesIconStore(),
-       _platform = platform ?? AppIconSwitcherPlatform.instance,
+       _platform = platform ?? AppIconChangerPlatform.instance,
        _clock = clock ?? DateTime.now {
     final ids = <String>{};
     for (final icon in icons) {
@@ -64,7 +64,7 @@ class AppIconSwitcher extends ChangeNotifier {
   http.Client? _httpClient;
   final bool _ownsHttpClient;
   final IconStore _store;
-  final AppIconSwitcherPlatform _platform;
+  final AppIconChangerPlatform _platform;
   final DateTime Function() _clock;
 
   String? _userChoice;
@@ -235,7 +235,7 @@ class AppIconSwitcher extends ChangeNotifier {
       FlutterErrorDetails(
         exception: error,
         stack: stack,
-        library: 'app_icon_switcher',
+        library: 'remote_icon_changer',
         context: ErrorDescription('while switching the app icon'),
         silent: error is PlatformException,
       ),

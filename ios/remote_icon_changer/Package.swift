@@ -4,19 +4,19 @@
 import PackageDescription
 
 let package = Package(
-    name: "app_icon_switcher",
+    name: "remote_icon_changer",
     platforms: [
         .iOS("13.0")
     ],
     products: [
-        .library(name: "app-icon-switcher", targets: ["app_icon_switcher"])
+        .library(name: "remote-icon-changer", targets: ["remote_icon_changer"])
     ],
     dependencies: [
         .package(name: "FlutterFramework", path: "../FlutterFramework")
     ],
     targets: [
         .target(
-            name: "app_icon_switcher",
+            name: "remote_icon_changer",
             dependencies: [
                 .product(name: "FlutterFramework", package: "FlutterFramework")
             ],

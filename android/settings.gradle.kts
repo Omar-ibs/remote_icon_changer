@@ -1,1 +1,1 @@
-rootProject.name = "app_icon_switcher"
+rootProject.name = "remote_icon_changer"

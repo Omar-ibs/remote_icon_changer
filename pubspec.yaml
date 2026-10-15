@@ -1,9 +1,9 @@
-name: app_icon_changer
+name: remote_icon_changer
 description: "Switch the app icon among icons bundled in the app, from the user's choice or a remote config. iOS and Android."
 version: 0.1.0
-homepage: https://github.com/Omar-ibs/app_icon_switcher
-repository: https://github.com/Omar-ibs/app_icon_switcher
-issue_tracker: https://github.com/Omar-ibs/app_icon_switcher/issues
+homepage: https://github.com/Omar-ibs/remote_icon_changer
+repository: https://github.com/Omar-ibs/remote_icon_changer
+issue_tracker: https://github.com/Omar-ibs/remote_icon_changer/issues
 # publish_to: none
 
 environment:
@@ -40,10 +40,10 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.omaribrahim.app_icon_switcher
-        pluginClass: AppIconSwitcherPlugin
+        package: com.omaribrahim.remote_icon_changer
+        pluginClass: RemoteIconChangerPlugin
       ios:
-        pluginClass: AppIconSwitcherPlugin
+        pluginClass: RemoteIconChangerPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

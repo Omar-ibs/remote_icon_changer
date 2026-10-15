@@ -1,4 +1,4 @@
-package com.omaribrahim.app_icon_switcher
+package com.omaribrahim.remote_icon_changer
 
 import android.content.ComponentName
 import android.content.Context
@@ -15,7 +15,7 @@ import io.flutter.plugin.common.MethodChannel.Result
  * Switches the launcher icon by enabling one `<activity-alias>` of the app and
  * disabling the others.
  */
-class AppIconSwitcherPlugin :
+class RemoteIconChangerPlugin :
     FlutterPlugin,
     MethodCallHandler {
     private lateinit var channel: MethodChannel
@@ -23,7 +23,7 @@ class AppIconSwitcherPlugin :
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         context = binding.applicationContext
-        channel = MethodChannel(binding.binaryMessenger, "app_icon_switcher")
+        channel = MethodChannel(binding.binaryMessenger, "remote_icon_changer")
         channel.setMethodCallHandler(this)
     }
 
@@ -52,7 +52,7 @@ class AppIconSwitcherPlugin :
                 else -> result.notImplemented()
             }
         } catch (e: Exception) {
-            result.error("app_icon_switcher_failed", e.message ?: e.toString(), null)
+            result.error("remote_icon_changer_failed", e.message ?: e.toString(), null)
         }
     }
 

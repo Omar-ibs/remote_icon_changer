@@ -3,7 +3,7 @@
 library;
 
 export 'src/app_icon.dart';
-export 'src/app_icon_switcher.dart';
+export 'src/remote_icon_changer.dart';
 export 'src/icon_store.dart';
-export 'src/method_channel_app_icon_switcher.dart';
-export 'src/app_icon_switcher_platform.dart';
+export 'src/method_channel_remote_icon_changer.dart';
+export 'src/remote_icon_changer_platform.dart';

@@ -2,11 +2,11 @@ import Flutter
 import UIKit
 
 /// Switches the app icon with `UIApplication.setAlternateIconName`.
-public class AppIconSwitcherPlugin: NSObject, FlutterPlugin {
+public class RemoteIconChangerPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(
-      name: "app_icon_switcher", binaryMessenger: registrar.messenger())
-    let instance = AppIconSwitcherPlugin()
+      name: "remote_icon_changer", binaryMessenger: registrar.messenger())
+    let instance = RemoteIconChangerPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 
@@ -37,7 +37,7 @@ public class AppIconSwitcherPlugin: NSObject, FlutterPlugin {
             if let error = error {
               result(
                 FlutterError(
-                  code: "app_icon_switcher_failed", message: error.localizedDescription,
+                  code: "remote_icon_changer_failed", message: error.localizedDescription,
                   details: nil))
             } else {
               result(true)

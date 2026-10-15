@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:app_icon_switcher/app_icon_switcher.dart';
+import 'package:remote_icon_changer/remote_icon_changer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -20,7 +20,7 @@ const icons = [
 ];
 const aliases = ['IconClassic', 'IconMidnight', 'IconViolet'];
 
-class FakePlatform extends AppIconSwitcherPlatform
+class FakePlatform extends AppIconChangerPlatform
     with MockPlatformInterfaceMixin {
   FakePlatform({this.current, this.supported = true});
 
@@ -88,7 +88,7 @@ void main() {
   late FakeServer server;
   late DateTime now;
 
-  AppIconSwitcher make({Uri? url}) => AppIconSwitcher(
+  AppIconChanger make({Uri? url}) => AppIconChanger(
     icons: icons,
     defaultIconId: 'classic',
     remoteUrl: url ?? remoteUrl,
@@ -169,13 +169,13 @@ void main() {
     expect(s.effectiveIconId, 'violet');
     expect(platform.current, 'AppIcon-Violet');
     expect(
-      store.values.containsKey(AppIconSwitcher.remoteAssignmentKey),
+      store.values.containsKey(AppIconChanger.remoteAssignmentKey),
       isFalse,
     );
   });
 
   group('failures keep the last assignment', () {
-    late AppIconSwitcher s;
+    late AppIconChanger s;
     setUp(() async {
       server.body = {'icon': 'midnight'};
       s = make();
@@ -245,7 +245,7 @@ void main() {
   });
 
   test('no remote URL means no requests', () async {
-    final s = AppIconSwitcher(
+    final s = AppIconChanger(
       icons: icons,
       defaultIconId: 'classic',
       httpClient: server.client,
@@ -274,8 +274,8 @@ void main() {
 
   test('stale stored ids are ignored', () async {
     store = MemoryIconStore({
-      AppIconSwitcher.userChoiceKey: 'gone',
-      AppIconSwitcher.remoteAssignmentKey: 'also-gone',
+      AppIconChanger.userChoiceKey: 'gone',
+      AppIconChanger.remoteAssignmentKey: 'also-gone',
     });
     final s = make(url: null);
     await s.init();
@@ -293,7 +293,7 @@ void main() {
 
   test('constructor rejects an unknown default', () {
     expect(
-      () => AppIconSwitcher(
+      () => AppIconChanger(
         icons: icons,
         defaultIconId: 'nope',
         store: store,
@@ -305,7 +305,7 @@ void main() {
 
   test('apply skips the platform call when the icon already matches', () async {
     platform.current = 'AppIcon-Violet';
-    store = MemoryIconStore({AppIconSwitcher.userChoiceKey: 'violet'});
+    store = MemoryIconStore({AppIconChanger.userChoiceKey: 'violet'});
     final s = make();
     await s.init();
     await s.apply();
@@ -412,7 +412,7 @@ void main() {
   });
 
   group('method channel', () {
-    final channel = MethodChannelAppIconSwitcher();
+    final channel = MethodChannelAppIconChanger();
     final log = <MethodCall>[];
 
     setUp(() {
@@ -434,8 +434,8 @@ void main() {
           .setMockMethodCallHandler(channel.methodChannel, null);
     });
 
-    test('uses the app_icon_switcher channel', () {
-      expect(channel.methodChannel.name, 'app_icon_switcher');
+    test('uses the remote_icon_changer channel', () {
+      expect(channel.methodChannel.name, 'remote_icon_changer');
     });
 
     test('isSupported has no arguments', () async {
@@ -477,8 +477,8 @@ void main() {
 
     test('the default platform instance is the method channel', () {
       expect(
-        AppIconSwitcherPlatform.instance,
-        isA<MethodChannelAppIconSwitcher>(),
+        AppIconChangerPlatform.instance,
+        isA<MethodChannelAppIconChanger>(),
       );
     });
   });
