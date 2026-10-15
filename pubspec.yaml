@@ -1,4 +1,4 @@
-name: app_icon_switcher
+name: app_icon_changer
 description: "Switch the app icon among icons bundled in the app, from the user's choice or a remote config. iOS and Android."
 version: 0.1.0
 homepage: https://github.com/Omar-ibs/app_icon_switcher
