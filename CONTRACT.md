@@ -96,7 +96,7 @@ Android it is queued and applied when the app is paused, or right away when
 | `getCurrentIcon` | none, or `{ "androidAliases": List<String> }` (Android only; omitted = every alias declared in the app) | `String?`: iOS `alternateIconName` (null = primary); Android: the simple name of the enabled alias, or null if none is found |
 | `setIcon` | `{ "iosName": String?, "androidAlias": String, "androidAliases": List<String> }` | `bool` success |
 
-Android `setIcon`: enable `<packageName>.<androidAlias>` and disable every
+Android `setIcon`: enable the declared alias whose short name (after the last dot) is `<androidAlias>`, then disable every
 other alias in `androidAliases`, using `PackageManager.DONT_KILL_APP`.
 iOS `setIcon`: `UIApplication.shared.setAlternateIconName(iosName)`.
 
